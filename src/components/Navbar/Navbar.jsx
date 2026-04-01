@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { HiMenuAlt3 } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
-
+import { Link, NavLink } from "react-router";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -14,20 +14,27 @@ const Navbar = () => {
       <div className="flex items-center justify-between">
         
         {/* Logo */}
-        <div className="text-3xl font-bold tracking-tighter text-black tk-playfair-display">
+        <Link to="/" className="text-3xl font-bold tracking-tighter text-black tk-playfair-display">
           Boipy
-        </div>
+        </Link>
 
         {/* Desktop Navigation (Visible on md and above) */}
         <div className="hidden md:flex items-center space-x-8 text-gray-600 font-medium">
-          <a 
-            href="#" 
+          <NavLink
+            to="/"
             className="px-5 py-2 border border-[#23BE0A] text-[#23BE0A] rounded-lg hover:bg-[#23BE0A] hover:text-white transition-all duration-300"
           >
             Home
-          </a>
-          <a href="#" className="hover:text-[#23BE0A] transition">Listed Books</a>
-          <a href="#" className="hover:text-[#23BE0A] transition">Pages to Read</a>
+          </NavLink>
+          <NavLink to="/about" className="hover:text-[#23BE0A] transition">
+            About
+          </NavLink>
+          <NavLink to="/listed-books" className="hover:text-[#23BE0A] transition">
+            Listed Books
+          </NavLink>
+          <NavLink to="/page-to-read" className="hover:text-[#23BE0A] transition">
+            Pages to Read
+          </NavLink>
         </div>
 
         {/* Desktop Action Buttons */}
@@ -73,18 +80,19 @@ const Navbar = () => {
           
           {/* Mobile Links */}
           <div className="flex flex-col space-y-6 text-gray-700 font-semibold">
-            <a href="#" onClick={toggleMenu} className="text-[#23BE0A] text-lg bg-[#23BE0A]/10 px-4 py-2 rounded-lg">Home</a>
-            <a href="#" onClick={toggleMenu} className="hover:text-[#23BE0A] transition pl-4">Listed Books</a>
-            <a href="#" onClick={toggleMenu} className="hover:text-[#23BE0A] transition pl-4">Pages to Read</a>
-            
+            <NavLink to="/" onClick={toggleMenu} className="text-[#23BE0A] text-lg bg-[#23BE0A]/10 px-4 py-2 rounded-lg">Home</NavLink>
+            <NavLink to="/about" onClick={toggleMenu} className="hover:text-[#23BE0A] transition pl-4">About</NavLink>
+            <NavLink to="/listed-books" onClick={toggleMenu} className="hover:text-[#23BE0A] transition pl-4">Listed Books</NavLink>
+            <NavLink to="/page-to-read" onClick={toggleMenu} className="hover:text-[#23BE0A] transition pl-4">Pages to Read</NavLink>
+
             {/* Mobile Buttons */}
             <div className="pt-8 flex flex-col space-y-4">
-              <a href="#" onClick={toggleMenu} className="w-full text-center py-3 bg-[#23BE0A] text-white font-bold rounded-xl shadow-lg">
+              <NavLink to="/sign-in" onClick={toggleMenu} className="w-full text-center py-3 bg-[#23BE0A] text-white font-bold rounded-xl shadow-lg">
                 Sign In
-              </a>
-              <a href="#" onClick={toggleMenu} className="w-full text-center py-3 bg-[#59C6D2] text-white font-bold rounded-xl shadow-lg">
+              </NavLink>
+              <NavLink to="/sign-up" onClick={toggleMenu} className="w-full text-center py-3 bg-[#59C6D2] text-white font-bold rounded-xl shadow-lg">
                 Sign Up
-              </a>
+              </NavLink>
             </div>
           </div>
         </div>
