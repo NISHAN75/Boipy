@@ -10,8 +10,8 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="relative sticky z-10">
-      <div className="py-5 flex items-center justify-between">
+    <nav className="relative z-10">
+      <div className="flex items-center justify-between">
         
         {/* Logo */}
         <div className="text-3xl font-bold tracking-tighter text-black tk-playfair-display">
@@ -52,7 +52,7 @@ const Navbar = () => {
 
       {/* 1. Glassmorphism Overlay (কাঁচের মতো ব্যাকগ্রাউন্ড) */}
       <div 
-        className={`fixed inset-0 bg-black/20 backdrop-blur-md z-40 transition-opacity duration-300 md:hidden ${
+        className={`fixed inset-0 bg-black/20 backdrop-blur-xs z-40 transition-opacity duration-300 md:hidden ${
           isOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
         onClick={toggleMenu}
