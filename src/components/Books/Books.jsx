@@ -4,12 +4,13 @@ import Book from "../Book/Book";
 const BOOKS_PER_PAGE = 6;
 
 const Books = ({ data }) => {
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(() => {
+        return Number(sessionStorage.getItem("currentPage")) || 1;  // ✅ restore saved page
+    });
     const [loading, setLoading] = useState(false);
 
     const sectionRef = useRef(null);
 
-    // ✅ Ensure data is always an array
     const safeData = Array.isArray(data) ? data : data?.books || [];
 
     const totalPages = Math.ceil(safeData.length / BOOKS_PER_PAGE);
@@ -17,10 +18,10 @@ const Books = ({ data }) => {
     const startIndex = (currentPage - 1) * BOOKS_PER_PAGE;
     const currentBooks = safeData.slice(startIndex, startIndex + BOOKS_PER_PAGE);
 
-    // Reset page when data changes
+    // ✅ Save page to sessionStorage whenever it changes
     useEffect(() => {
-        setCurrentPage(1);
-    }, [safeData]);
+        sessionStorage.setItem("currentPage", currentPage);
+    }, [currentPage]);
 
     const handlePageChange = (page) => {
         if (page < 1 || page > totalPages) return;
@@ -53,7 +54,6 @@ const Books = ({ data }) => {
         return pages;
     };
 
-    // ✅ Handle empty / invalid data
     if (!Array.isArray(safeData) || safeData.length === 0) {
         return (
             <section className="py-16 text-center">
@@ -67,7 +67,6 @@ const Books = ({ data }) => {
             <div className="container mx-auto px-5">
                 <h2 className="text-4xl font-bold mb-5 text-center">Books</h2>
 
-                {/* Books Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {loading
                         ? Array.from({ length: BOOKS_PER_PAGE }).map((_, i) => (
@@ -84,11 +83,9 @@ const Books = ({ data }) => {
                           ))}
                 </div>
 
-                {/* Pagination */}
                 {totalPages > 1 && (
                     <div className="flex justify-center mt-12">
                         <div className="join">
-                            {/* Prev */}
                             <button
                                 className="join-item btn btn-outline"
                                 onClick={() => handlePageChange(currentPage - 1)}
@@ -97,7 +94,6 @@ const Books = ({ data }) => {
                                 «
                             </button>
 
-                            {/* Page Numbers */}
                             {getVisiblePages().map((page) => (
                                 <button
                                     key={page}
@@ -112,7 +108,6 @@ const Books = ({ data }) => {
                                 </button>
                             ))}
 
-                            {/* Next */}
                             <button
                                 className="join-item btn btn-outline"
                                 onClick={() => handlePageChange(currentPage + 1)}
@@ -124,7 +119,6 @@ const Books = ({ data }) => {
                     </div>
                 )}
 
-                {/* Info */}
                 <p className="text-center text-gray-500 mt-4 text-sm">
                     Showing {startIndex + 1}–
                     {Math.min(startIndex + BOOKS_PER_PAGE, safeData.length)} of{" "}

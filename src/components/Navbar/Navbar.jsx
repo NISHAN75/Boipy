@@ -20,31 +20,65 @@ const Navbar = () => {
 
         {/* Desktop Navigation (Visible on md and above) */}
         <div className="hidden md:flex items-center space-x-8 text-gray-600 font-medium">
+
+          {/* Home Link */}
           <NavLink
             to="/"
-            className="px-5 py-2 border border-[#23BE0A] text-[#23BE0A] rounded-lg hover:bg-[#23BE0A] hover:text-white transition-all duration-300"
+            className={({ isActive }) =>
+              isActive
+                ? "px-5 py-2 border border-[#23BE0A] text-[#23BE0A] rounded-lg font-semibold transition-all duration-500 ease-linear opacity-100"
+                : "px-5 py-2 border rounded-lg border-transparent hover:border-[#23BE0A]  hover:text-[#23BE0A] transition-all duration-500 ease-linear opacity-80 hover:opacity-100"
+            }
           >
             Home
           </NavLink>
-          <NavLink to="/about" className="hover:text-[#23BE0A] transition">
+
+          {/* About */}
+          <NavLink
+            to="/about"
+            className={({ isActive }) =>
+              isActive
+                ? "px-5 py-2 border border-[#23BE0A] text-[#23BE0A] rounded-lg font-semibold transition-all duration-500 ease-linear opacity-100"
+                : "px-5 py-2 border rounded-lg border-transparent hover:border-[#23BE0A]  hover:text-[#23BE0A] transition-all duration-500 ease-linear opacity-80 hover:opacity-100"
+            }
+          >
             About
           </NavLink>
-          <NavLink to="/listed-books" className="hover:text-[#23BE0A] transition">
+
+          {/* Listed Books Link */}
+          <NavLink
+            to="/listed-books"
+            className={({ isActive }) =>
+              isActive
+                ? "px-5 py-2 border border-[#23BE0A] text-[#23BE0A] rounded-lg font-semibold transition-all duration-500 ease-linear opacity-100"
+                : "px-5 py-2 border rounded-lg border-transparent hover:border-[#23BE0A]  hover:text-[#23BE0A] transition-all duration-500 ease-linear opacity-80 hover:opacity-100"
+            }
+          >
             Listed Books
           </NavLink>
-          <NavLink to="/page-to-read" className="hover:text-[#23BE0A] transition">
+
+          {/* Pages to Read Link */}
+          <NavLink
+            to="/page-to-read"
+            className={({ isActive }) =>
+              isActive
+                ? "px-5 py-2 border border-[#23BE0A] text-[#23BE0A] rounded-lg font-semibold transition-all duration-500 ease-linear opacity-100"
+                : "px-5 py-2 border rounded-lg border-transparent hover:border-[#23BE0A]  hover:text-[#23BE0A] transition-all duration-500 ease-linear opacity-80 hover:opacity-100"
+            }
+          >
             Pages to Read
           </NavLink>
+
         </div>
 
         {/* Desktop Action Buttons */}
         <div className="hidden md:flex items-center space-x-4">
-          <a href="#" className="px-6 py-2.5 bg-[#23BE0A] text-white font-semibold rounded-lg hover:bg-[#1fa808] transition shadow-sm text-center">
+          <NavLink to="/sing-in" className="px-6 py-2.5 bg-[#23BE0A] text-white font-semibold rounded-lg hover:bg-[#1fa808] transition shadow-sm text-center">
             Sign In
-          </a>
-          <a href="#" className="px-6 py-2.5 bg-[#59C6D2] text-white font-semibold rounded-lg hover:bg-[#4ab5c1] transition shadow-sm text-center">
+          </NavLink>
+          <NavLink to="/sing-up" className="px-6 py-2.5 bg-[#59C6D2] text-white font-semibold rounded-lg hover:bg-[#4ab5c1] transition shadow-sm text-center">
             Sign Up
-          </a>
+          </NavLink>
         </div>
 
         {/* Mobile Menu Button (Visible only on small screens) */}

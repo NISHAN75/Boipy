@@ -1,9 +1,10 @@
 import {
-    FaArrowUp, FaEnvelope, FaGlobe, FaInstagram, FaRegEnvelope, FaTwitter
+  FaEnvelope, FaGlobe, FaInstagram, FaRegEnvelope, FaTwitter
 } from 'react-icons/fa';
 import {
-    SiAmericanexpress, SiMastercard, SiPaypal, SiVisa
+  SiAmericanexpress, SiMastercard, SiPaypal, SiVisa
 } from 'react-icons/si';
+import ScrollToTop from '../ScrollToTop/ScrollToTop';
 
 const Footer = () => {
   return (
@@ -84,14 +85,7 @@ const Footer = () => {
             <SiPaypal size={28} />
           </div>
         </div>
-
-        {/* Scroll to Top Button */}
-        <button 
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-6 right-6 md:bottom-10 md:right-10 bg-black text-white p-4 rounded-full shadow-2xl hover:bg-gray-800 transition-all hover:-translate-y-1 active:scale-90 z-50"
-        >
-          <FaArrowUp size={16} />
-        </button>
+        <ScrollToTop></ScrollToTop>
       </div>
     </footer>
   );
