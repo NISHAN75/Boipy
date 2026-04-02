@@ -123,7 +123,7 @@ const SignIn = () => {
                     <button
                         type="submit"
                         disabled={loading}
-                        className={`w-full text-white font-semibold py-3 rounded-xl transition-all duration-300 mt-2 text-sm shadow-md
+                        className={`w-full cursor-pointer text-white font-semibold py-3 rounded-xl transition-all duration-300 mt-2 text-sm shadow-md
                             ${loading
                                 ? "bg-gray-300 cursor-not-allowed"
                                 : "bg-[#23BE0A] hover:bg-[#1a8e08] hover:shadow-lg"
@@ -147,7 +147,7 @@ const SignIn = () => {
                     <button
                         type="button"
                         onClick={() => handleSocialSignIn(googleSignIn, "Google")}
-                        className="flex items-center justify-center gap-2 border border-gray-200 rounded-xl py-3 hover:bg-gray-50 hover:border-gray-300 transition-all duration-300 group"
+                        className="flex cursor-pointer items-center justify-center gap-2 border border-gray-200 rounded-xl py-3 hover:bg-gray-50 hover:border-gray-300 transition-all duration-300 group"
                     >
                         <FaGoogle className="text-red-500 text-lg group-hover:scale-110 transition-transform duration-300" />
                         <span className="text-xs font-medium text-gray-600 hidden sm:block">Google</span>
@@ -157,7 +157,7 @@ const SignIn = () => {
                     <button
                         type="button"
                         onClick={() => handleSocialSignIn(facebookSignIn, "Facebook")}
-                        className="flex items-center justify-center gap-2 border border-gray-200 rounded-xl py-3 hover:bg-gray-50 hover:border-gray-300 transition-all duration-300 group"
+                        className="flex cursor-pointer items-center justify-center gap-2 border border-gray-200 rounded-xl py-3 hover:bg-gray-50 hover:border-gray-300 transition-all duration-300 group"
                     >
                         <FaFacebook className="text-blue-600 text-lg group-hover:scale-110 transition-transform duration-300" />
                         <span className="text-xs font-medium text-gray-600 hidden sm:block">Facebook</span>
@@ -167,7 +167,7 @@ const SignIn = () => {
                     <button
                         type="button"
                         onClick={() => handleSocialSignIn(twitterSignIn, "Twitter")}
-                        className="flex items-center justify-center gap-2 border border-gray-200 rounded-xl py-3 hover:bg-gray-50 hover:border-gray-300 transition-all duration-300 group"
+                        className="flex cursor-pointer items-center justify-center gap-2 border border-gray-200 rounded-xl py-3 hover:bg-gray-50 hover:border-gray-300 transition-all duration-300 group"
                     >
                         <FaTwitter className="text-sky-500 text-lg group-hover:scale-110 transition-transform duration-300" />
                         <span className="text-xs font-medium text-gray-600 hidden sm:block">Twitter</span>

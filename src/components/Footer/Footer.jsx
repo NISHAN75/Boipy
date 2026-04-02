@@ -75,7 +75,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-[13px] text-gray-500">
           <div className="text-center md:text-left order-2 md:order-1">
-            © Copyright 2024 | <span className="text-black font-semibold">Boipy</span> By <span className="text-black font-semibold">devnishan</span>
+            © Copyright 2024 | <span className="text-black font-semibold">Boipy</span> By <a href="https://nishan75.github.io/Web-developer-portfolio/" className="text-black font-semibold">devnishan</a>
           </div>
           
           <div className="flex items-center space-x-5 grayscale opacity-50 hover:opacity-100 transition-opacity order-1 md:order-2">
