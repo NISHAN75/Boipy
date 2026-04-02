@@ -45,7 +45,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-8 text-gray-600 font-medium">
+        <div className="hidden lg:flex items-center space-x-8 text-gray-600 font-medium">
           <NavLink to="/" className={navLinkClass}>Home</NavLink>
           <NavLink to="/about" className={navLinkClass}>About</NavLink>
           <NavLink to="/listed-books" className={navLinkClass}>Listed Books</NavLink>
@@ -53,7 +53,7 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Action Buttons */}
-        <div className="hidden md:flex items-center space-x-4">
+        <div className="hidden lg:flex items-center space-x-4">
           {user ? (
             // ✅ Logged in state
             <div className="flex items-center gap-3">
@@ -109,7 +109,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden">
+        <div className="lg:hidden">
           <button onClick={toggleMenu} className="text-3xl text-gray-800 focus:outline-none p-2">
             {isOpen ? <IoClose /> : <HiMenuAlt3 />}
           </button>
@@ -118,7 +118,7 @@ const Navbar = () => {
 
       {/* Mobile Overlay */}
       <div
-        className={`fixed inset-0 bg-black/20 backdrop-blur-xs z-40 transition-opacity duration-300 md:hidden ${
+        className={`fixed inset-0 bg-black/20 backdrop-blur-xs z-40 transition-opacity duration-300 lg:hidden ${
           isOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
         onClick={toggleMenu}
@@ -127,7 +127,7 @@ const Navbar = () => {
       {/* Mobile Side Drawer */}
       <div className={`fixed top-0 left-0 h-full w-72 bg-white/80 backdrop-blur-lg z-50 shadow-2xl transform ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
-        } transition-transform duration-500 ease-in-out md:hidden border-r border-white/20`}
+        } transition-transform duration-500 ease-in-out lg:hidden border-r border-white/20`}
       >
         <div className="p-8">
           <div className="flex justify-between items-center mb-10">

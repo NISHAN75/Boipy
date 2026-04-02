@@ -1,15 +1,18 @@
-import { useEffect, useState } from 'react';
-import { useOutletContext, useParams } from 'react-router';
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate, useOutletContext, useParams } from 'react-router';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import { addToReadList, addToWishList, getStoredBook } from '../../components/Utility/addToDB';
+import { AuthContext } from '../AuthContext/AuthContext';
+import { addToReadList, addToWishList, getStoredBook } from '../Utility/addToDB';
 
-const MySwal = withReactContent(Swal)
+const MySwal = withReactContent(Swal);
 
 const BookDetails = () => {
 
     const data = useOutletContext();
     const { id } = useParams();
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -21,7 +24,6 @@ const BookDetails = () => {
         (item) => String(item.bookId || item.id) === id
     );
 
-    // ✅ Check initial state from localStorage
     const [isRead, setIsRead] = useState(() =>
         getStoredBook("readList").includes(book?.bookId)
     );
@@ -33,34 +35,57 @@ const BookDetails = () => {
         return <p className="text-center py-10">Book not found</p>;
     }
 
-const handleMarkAsRead = (id) => {
-    addToReadList(id);
-    setIsRead(true);
-    setIsWished(false);
-    MySwal.fire({
-        title: "Added to Read List!",
-        text: `${book.bookName} has been marked as read.`,
-        icon: "success",
-        confirmButtonColor: "#23BE0A",
-        confirmButtonText: "Great!",
-        timer: 2000,
-        timerProgressBar: true,
-    });
-};
+    // ✅ Auth check helper
+    const checkAuth = () => {
+        if (!user) {
+            Swal.fire({
+                title: "Please Sign In!",
+                text: "You need to sign in to add books to your list.",
+                icon: "warning",
+                confirmButtonColor: "#23BE0A",
+                confirmButtonText: "Sign In",
+                showCancelButton: true,
+                cancelButtonText: "Cancel",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate("/sing-in");
+                }
+            });
+            return false;
+        }
+        return true;
+    };
 
-const handleAddToWishlist = (id) => {
-    addToWishList(id);
-    setIsWished(true);
-    MySwal.fire({
-        title: "Added to Wishlist!",
-        text: `${book.bookName} has been added to your wishlist.`,
-        icon: "success",
-        confirmButtonColor: "#50B1C9",
-        confirmButtonText: "Awesome!",
-        timer: 2000,
-        timerProgressBar: true,
-    });
-};
+    const handleMarkAsRead = (id) => {
+        if (!checkAuth()) return; // ✅ stop if not logged in
+        addToReadList(id);
+        setIsRead(true);
+        setIsWished(false);
+        MySwal.fire({
+            title: "Added to Read List!",
+            text: `${book.bookName} has been marked as read.`,
+            icon: "success",
+            confirmButtonColor: "#23BE0A",
+            confirmButtonText: "Great!",
+            timer: 2000,
+            timerProgressBar: true,
+        });
+    };
+
+    const handleAddToWishlist = (id) => {
+        if (!checkAuth()) return; // ✅ stop if not logged in
+        addToWishList(id);
+        setIsWished(true);
+        MySwal.fire({
+            title: "Added to Wishlist!",
+            text: `${book.bookName} has been added to your wishlist.`,
+            icon: "success",
+            confirmButtonColor: "#50B1C9",
+            confirmButtonText: "Awesome!",
+            timer: 2000,
+            timerProgressBar: true,
+        });
+    };
 
     return (
         <div className="container mx-auto p-6 lg:p-12">
@@ -136,11 +161,9 @@ const handleAddToWishlist = (id) => {
                             {isRead ? "✔ Already Read" : "Mark as Read"}
                         </button>
 
-                        {/* ✅ Wishlist button - disabled if read or already wishlisted */}
+                        {/* ✅ Wishlist button */}
                         <button
-                            onClick={
-                                () => handleAddToWishlist(book.bookId)
-                            }
+                            onClick={() => handleAddToWishlist(book.bookId)}
                             disabled={isWished || isRead}
                             className={`btn border-none text-white px-8 rounded-lg transition-all duration-300
                                 ${isWished || isRead
