@@ -1,17 +1,21 @@
 import {
     createUserWithEmailAndPassword,
+    FacebookAuthProvider,
     GoogleAuthProvider,
     onAuthStateChanged,
     signInWithEmailAndPassword,
     signInWithPopup,
     signOut,
+    TwitterAuthProvider,
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
-import auth from "../../../firebase/firebase.init";
+import auth from "../../firebase/firebase.init";
 
 export const AuthContext = createContext(null);
 
 const googleProvider = new GoogleAuthProvider();
+const facebookProvider = new FacebookAuthProvider();  // ✅ added
+const twitterProvider = new TwitterAuthProvider();    // ✅ added
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -35,6 +39,18 @@ const AuthProvider = ({ children }) => {
         return signInWithPopup(auth, googleProvider);
     };
 
+    // ✅ Facebook Sign In
+    const facebookSignIn = () => {
+        setLoading(true);
+        return signInWithPopup(auth, facebookProvider);
+    };
+
+    // ✅ Twitter Sign In
+    const twitterSignIn = () => {
+        setLoading(true);
+        return signInWithPopup(auth, twitterProvider);
+    };
+
     // ✅ Sign Out
     const logOut = () => {
         setLoading(true);
@@ -50,7 +66,16 @@ const AuthProvider = ({ children }) => {
         return () => unsubscribe();
     }, []);
 
-    const authInfo = { user, loading, signUp, signIn, googleSignIn, logOut };
+    const authInfo = {
+        user,
+        loading,
+        signUp,
+        signIn,
+        googleSignIn,
+        facebookSignIn,  // ✅
+        twitterSignIn,   // ✅
+        logOut
+    };
 
     return (
         <AuthContext.Provider value={authInfo}>

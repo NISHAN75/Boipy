@@ -40,7 +40,7 @@ const ListedBooks = () => {
 
     // ✅ Reusable Book Card
     const BookCard = ({ book }) => (
-        <div className="card lg:card-side bg-base-100 border border-gray-200 p-6 gap-6 shadow-sm rounded-2xl">
+        <div className="card lg:card-side bg-base-100 border border-gray-200 p-6 gap-6 shadow-sm rounded-2xl bg-white">
             <figure className="bg-gray-100 rounded-2xl p-8 lg:w-60 flex justify-center">
                 <img src={book.image} alt={book.bookName} className="h-5/6 shadow-lg rounded-md object-contain" />
             </figure>
@@ -96,7 +96,7 @@ const ListedBooks = () => {
                     <div tabIndex={0} role="button" className="btn bg-[#23BE0A] text-white px-8 hover:bg-[#1a8e08] border-none">
                         {sortBy === "rating" ? "Rating" : sortBy === "pages" ? "Number of Pages" : sortBy === "year" ? "Publisher Year" : "Sort By"} ▼
                     </div>
-                    <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 mt-2">
+                    <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 mt-2 bg-white">
                         <li><a onClick={() => setSortBy("rating")}>Rating</a></li>
                         <li><a onClick={() => setSortBy("pages")}>Number of Pages</a></li>
                         <li><a onClick={() => setSortBy("year")}>Publisher Year</a></li>
@@ -110,14 +110,14 @@ const ListedBooks = () => {
                     <button
                         role="tab"
                         onClick={() => setActiveTab('read')}
-                        className={`tab h-14 text-lg transition-all duration-300 ${activeTab === 'read' ? 'tab-active font-bold' : 'text-gray-400'}`}
+                        className={`tab h-14 text-lg transition-all duration-300 hover:text-black ${activeTab === 'read' ? 'tab-active font-bold' : 'text-gray-400'}`}
                     >
                         Read Books ({readBooks.length})
                     </button>
                     <button
                         role="tab"
                         onClick={() => setActiveTab('wishlist')}
-                        className={`tab h-14 text-lg transition-all duration-300 ${activeTab === 'wishlist' ? 'tab-active font-bold' : 'text-gray-400'}`}
+                        className={`tab h-14 text-lg transition-all duration-300 hover:text-black ${activeTab === 'wishlist' ? 'tab-active font-bold' : 'text-gray-400'}`}
                     >
                         Wishlist Books ({wishBooks.length})
                     </button>

@@ -4,8 +4,6 @@ import Books from "../../components/Books/Books";
 
 const Home = () => {
     const data = useOutletContext();
-    console.log(data);
-    
     return (
         <>
             {/* banner section */}
